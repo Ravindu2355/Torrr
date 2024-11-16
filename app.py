@@ -14,7 +14,7 @@ if not os.path.exists(DOWNLOAD_DIR):
 
 # This dictionary will store the download handle for each active torrent by its magnet link
 active_torrents = {}
-url_for('static', filename='path/to/file')
+#url_for('static', filename='path/to/file')
 
 @app.route('/download', methods=['GET'])
 def download_torrent():
