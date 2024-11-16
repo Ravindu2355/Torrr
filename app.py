@@ -61,13 +61,18 @@ def get_download_progress():
     
     # Check progress for each active torrent
     for magnet_link, torrent_handle in active_torrents.items():
-        status = torrent_handle.status()
-        progress_data[magnet_link] = {
-            "state": status.state,
-            "download_rate_kb_s": status.download_rate / 1000,
-            "downloaded_mb": status.total_download / 1024 / 1024,
-            "progress_percentage": status.progress * 100
-        }
+        if torrent_handle.is_valid():
+            try:
+                s = torrent_handle.status()
+                progress_data[magnet_link] = {
+                    'name': torrent_handle.name(),
+                    'download_rate': s.download_rate / 1000,  # Convert to kB/s
+                    'upload_rate': s.upload_rate / 1000,  # Convert to kB/s
+                    'progress': s.progress * 100,  # Progress percentage
+                    'num_peers': s.num_peers
+                }
+            except RuntimeError as e:
+                progress_data[magnet_link] = {'error': f'Failed to get status: {str(e)}'}
 
     return jsonify(progress_data)
 
