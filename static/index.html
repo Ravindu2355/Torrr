@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torrent Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Torrent Downloader</h1>
+        
+        <!-- Magnet Link Form -->
+        <div id="magnet-form">
+            <label for="magnet-link">Enter Magnet Link:</label>
+            <input type="text" id="magnet-link" placeholder="Enter magnet link here">
+            <button onclick="startDownload()">Start Download</button>
+        </div>
+
+        <!-- Download Progress Section -->
+        <div id="progress-section">
+            <h3>Download Progress</h3>
+            <div id="progress-info"></div>
+        </div>
+
+        <!-- Download Complete Section -->
+        <div id="complete-section">
+            <h3>Download Complete</h3>
+            <div id="file-link"></div>
+        </div>
+
+        <!-- Stop Download Section -->
+        <div id="stop-section">
+            <h3>Stop Download</h3>
+            <button onclick="stopDownload()">Stop Download</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
