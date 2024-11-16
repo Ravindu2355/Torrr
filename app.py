@@ -40,11 +40,17 @@ def download_torrent():
         }
 
         # Add magnet link and start downloading
-        torrent_handle = ses.add_magnet(magnet_link)
+        torrent_handle = ses.add_torrent({'url': magnet_link, 'save_path': DOWNLOAD_DIR})
         active_torrents[magnet_link] = torrent_handle
-        
+
+        # Start downloading in the background
+        return jsonify({
+            "status": "Torrent download started",
+            "magnet_link": magnet_link,
+            "download_path": DOWNLOAD_DIR
+        })
         # Start downloading and track the progress
-        return jsonify({"status": "Torrent download started", "magnet_link": magnet_link, "download_path": DOWNLOAD_DIR})
+        #return jsonify({"status": "Torrent download started", "magnet_link": magnet_link, "download_path": DOWNLOAD_DIR})
     except Exception as e:
         return jsonify({"error": f"Failed to start download: {str(e)}"}), 500
 
