@@ -1,7 +1,7 @@
 import os
 import time
 import libtorrent as lt
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify, url_for
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -14,7 +14,7 @@ if not os.path.exists(DOWNLOAD_DIR):
 
 # This dictionary will store the download handle for each active torrent by its magnet link
 active_torrents = {}
-#url_for('static', filename='path/to/file')
+url_for('static', filename='path/to/file')
 
 @app.route('/download', methods=['GET'])
 def download_torrent():
